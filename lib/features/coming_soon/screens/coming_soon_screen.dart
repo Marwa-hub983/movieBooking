@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/features/coming_soon/bloc/coming_soon_bloc.dart';
 import 'package:movieapp/features/coming_soon/bloc/coming_soon_event.dart';
 import 'package:movieapp/features/coming_soon/bloc/coming_soon_state.dart';
-import 'package:movieapp/shared/di/injection.dart';
+import 'package:movieapp/shared/dependencyInjection/injection.dart';
 import 'package:movieapp/shared/models/movie_model.dart';
 import 'package:movieapp/shared/utils/responsive.dart';
 import 'package:movieapp/shared/widgets/app_network_image.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/features/coming_soon/screens/coming_soon_screen.dart';
-import 'package:movieapp/features/home/screens/downloads_screen.dart';
+import 'package:movieapp/features/download/screens/downloads_screen.dart';
 import 'package:movieapp/features/home/screens/home_screen.dart';
-import 'package:movieapp/features/home/screens/more_screen.dart';
-import 'package:movieapp/features/home/screens/search_screen.dart';
+import 'package:movieapp/features/more/screens/more_screen.dart';
+import 'package:movieapp/features/search/screens/search_screen.dart';
 import 'package:movieapp/shared/widgets/app_bottom_nav.dart';
 
 /// Hosts main tabs and keeps [AppBottomNav] visible while switching screens.

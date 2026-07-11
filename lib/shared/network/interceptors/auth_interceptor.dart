@@ -13,7 +13,7 @@ class AuthInterceptor extends Interceptor {
           type: DioExceptionType.unknown,
           error: const ApiException(
             message:
-                'TMDB_API_KEY is missing. Run with --dart-define=TMDB_API_KEY=your_key',
+                'TMDB_API_KEY is missing. Copy .env.example to .env and run with --dart-define-from-file=.env',
           ),
           message: 'TMDB_API_KEY is missing.',
         ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/features/home/bloc/search/search_bloc.dart';
-import 'package:movieapp/features/home/bloc/search/search_event.dart';
-import 'package:movieapp/features/home/bloc/search/search_state.dart';
-import 'package:movieapp/shared/di/injection.dart';
+import 'package:movieapp/features/search/bloc/search/search_bloc.dart';
+import 'package:movieapp/features/search/bloc/search/search_event.dart';
+import 'package:movieapp/features/search/bloc/search/search_state.dart';
+import 'package:movieapp/shared/dependencyInjection/injection.dart';
 import 'package:movieapp/shared/models/movie_model.dart';
 import 'package:movieapp/shared/utils/responsive.dart';
 import 'package:movieapp/shared/widgets/app_network_image.dart';

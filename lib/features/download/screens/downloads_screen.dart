@@ -12,51 +12,52 @@ class DownloadsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 12.h),
+            SizedBox(height: 8.h),
             Text(
               'Smart Downloads',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 14.sp,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 28.h),
+            SizedBox(height: 18.h),
             Text(
               'Introducing Downloads For You',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 22.sp,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w800,
-                height: 1.25,
+                height: 1.2,
               ),
             ),
-            SizedBox(height: 14.h),
+            SizedBox(height: 10.h),
             Text(
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
               'Sit quam dui, vivamus bibendum ut. A morbi mi tortor ut '
               'felis non accumsan accumsan quis. Massa,',
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 13.sp,
-                height: 1.45,
+                color: Colors.white70,
+                fontSize: 12.sp,
+                height: 1.4,
               ),
             ),
-            const Spacer(),
+               SizedBox(height: 10.h),
+            //const Spacer(flex: 2),
             Center(
               child: Container(
-                width: 180.r,
-                height: 180.r,
+                width: 140.r,
+                height: 140.r,
                 decoration: const BoxDecoration(
                   color: Color(0xFF424242),
                   shape: BoxShape.circle,
                 ),
               ),
             ),
-            const Spacer(),
+           SizedBox(height: 20.h),
             SizedBox(
               width: double.infinity,
-              height: 44.h,
+              height: 38.h,
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -64,37 +65,37 @@ class DownloadsScreen extends StatelessWidget {
                   foregroundColor: Colors.white,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.r),
+                    borderRadius: BorderRadius.circular(3.r),
                   ),
                 ),
                 child: Text(
                   'SETUP',
                   style: TextStyle(
-                    fontSize: 15.sp,
+                    fontSize: 13.sp,
                     fontWeight: FontWeight.w700,
-                    letterSpacing: 0.5,
+                    letterSpacing: 0.4,
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 16.h),
+            SizedBox(height: 50.h),
             Center(
               child: Material(
                 color: const Color(0xFF2A2A2A),
-                borderRadius: BorderRadius.circular(4.r),
+                borderRadius: BorderRadius.circular(3.r),
                 child: InkWell(
                   onTap: () {},
-                  borderRadius: BorderRadius.circular(4.r),
+                  borderRadius: BorderRadius.circular(3.r),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 10.h,
+                      horizontal: 14.w,
+                      vertical: 8.h,
                     ),
                     child: Text(
                       'Find Something to Download',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 14.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -102,7 +103,7 @@ class DownloadsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 28.h),
+            SizedBox(height: 20.h),
           ],
         ),
       ),

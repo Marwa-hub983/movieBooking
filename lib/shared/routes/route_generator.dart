@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:movieapp/features/home/screens/main_shell.dart';
 import 'package:movieapp/features/home/screens/splash_screen.dart';
-import 'package:movieapp/features/username/models/profile.dart';
+import 'package:movieapp/features/username/domain/models/profile.dart';
 import 'package:movieapp/features/username/screens/username_screen.dart';
 import 'package:movieapp/shared/routes/routes.dart';
 

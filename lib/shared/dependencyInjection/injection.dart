@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movieapp/shared/di/injection.config.dart';
+import 'package:movieapp/shared/dependencyInjection/injection.config.dart';
 
 final GetIt sl = GetIt.instance;
 

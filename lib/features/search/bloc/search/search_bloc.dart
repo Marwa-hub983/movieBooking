@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movieapp/features/home/bloc/search/search_event.dart';
-import 'package:movieapp/features/home/bloc/search/search_state.dart';
+import 'package:movieapp/features/search/bloc/search/search_event.dart';
+import 'package:movieapp/features/search/bloc/search/search_state.dart';
 import 'package:movieapp/shared/domain/repositories/movie_repository.dart';
 import 'package:movieapp/shared/models/movie_model.dart';
 import 'package:movieapp/shared/models/result.dart';

@@ -1,7 +1,14 @@
 /// Central API / image configuration.
 ///
-/// Pass the key at run time:
-/// `flutter run --dart-define=TMDB_API_KEY=YOUR_API_KEY`
+/// Load the TMDB key from a local `.env` file (see `.env.example`):
+/// ```bash
+/// flutter run --dart-define-from-file=.env
+/// ```
+///
+/// Or pass it directly:
+/// ```bash
+/// flutter run --dart-define=TMDB_API_KEY=YOUR_API_KEY
+/// ```
 class ApiConstants {
   ApiConstants._();
 
@@ -9,6 +16,7 @@ class ApiConstants {
   static const String imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
   static const String backdropBaseUrl = 'https://image.tmdb.org/t/p/w780';
 
+  /// Injected at compile time from `.env` or `--dart-define`.
   static const String apiKey = String.fromEnvironment('TMDB_API_KEY');
 
   static const Duration connectTimeout = Duration(seconds: 15);

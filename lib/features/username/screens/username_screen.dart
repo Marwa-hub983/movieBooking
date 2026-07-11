@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:movieapp/shared/constants/assets/assets.dart';
 import 'package:movieapp/shared/routes/routes.dart';
 import 'package:movieapp/shared/utils/responsive.dart';
-import 'package:movieapp/features/username/models/profile.dart';
+import 'package:movieapp/features/username/domain/models/profile.dart';
 
 class UsernameScreen extends StatelessWidget {
   const UsernameScreen({super.key, this.profiles = kDefaultProfiles});
