@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:movieapp/features/home/bloc/home_bloc.dart';
-import 'package:movieapp/features/home/bloc/home_event.dart';
-import 'package:movieapp/features/home/bloc/home_state.dart';
+import 'package:movieapp/features/home/bloc/home/home_bloc.dart';
+import 'package:movieapp/features/home/bloc/home/home_event.dart';
+import 'package:movieapp/features/home/bloc/home/home_state.dart';
 import 'package:movieapp/shared/constants/assets/assets.dart';
 import 'package:movieapp/shared/di/injection.dart';
 import 'package:movieapp/shared/models/movie_model.dart';
-import 'package:movieapp/shared/routes/routes.dart';
 import 'package:movieapp/shared/utils/responsive.dart';
 import 'package:movieapp/shared/widgets/app_network_image.dart';
 
@@ -25,107 +23,85 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => sl<HomeBloc>()..add(HomeStarted(profileName: profileName)),
-      child: _HomeView(
-        profileName: profileName,
-        profileImage: profileImage,
-      ),
+      child: _HomeView(profileImage: profileImage),
     );
   }
 }
 
-class _HomeView extends StatefulWidget {
-  const _HomeView({required this.profileName, this.profileImage});
+class _HomeView extends StatelessWidget {
+  const _HomeView({this.profileImage});
 
-  final String profileName;
   final String? profileImage;
 
   @override
-  State<_HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<_HomeView> {
-  int _tabIndex = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-          return switch (state) {
-            HomeInitial() || HomeLoading() => const Center(
-                child: CircularProgressIndicator(color: Color(0xFFE50914)),
-              ),
-            HomeEmpty() => _MessageView(
-                message: 'No movies found.',
-                onRetry: () =>
-                    context.read<HomeBloc>().add(const HomeRetried()),
-              ),
-            HomeError(:final failure) => _MessageView(
-                message: failure.message,
-                onRetry: () =>
-                    context.read<HomeBloc>().add(const HomeRetried()),
-              ),
-            HomeLoaded(:final feed, :final profileName) => CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: Stack(
-                      children: [
-                        if (feed.featured != null)
-                          _Hero(movie: feed.featured!)
-                        else
-                          SizedBox(height: 280.h),
-                        _TopBar(profileImage: widget.profileImage),
-                      ],
-                    ),
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        return switch (state) {
+          HomeInitial() || HomeLoading() => const Center(
+              child: CircularProgressIndicator(color: Color(0xFFE50914)),
+            ),
+          HomeEmpty() => _MessageView(
+              message: 'No movies found.',
+              onRetry: () =>
+                  context.read<HomeBloc>().add(const HomeRetried()),
+            ),
+          HomeError(:final failure) => _MessageView(
+              message: failure.message,
+              onRetry: () =>
+                  context.read<HomeBloc>().add(const HomeRetried()),
+            ),
+          HomeLoaded(:final feed, :final profileName) => CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Stack(
+                    children: [
+                      if (feed.featured != null)
+                        _Hero(movie: feed.featured!)
+                      else
+                        SizedBox(height: 280.h),
+                      _TopBar(profileImage: profileImage),
+                    ],
                   ),
-                  SliverToBoxAdapter(
-                    child: _MovieRow(
-                      title: 'Previews',
-                      movies: feed.popular,
-                      circular: true,
-                    ),
+                ),
+                SliverToBoxAdapter(
+                  child: _MovieRow(
+                    title: 'Previews',
+                    movies: feed.popular,
+                    circular: true,
                   ),
-                  SliverToBoxAdapter(
-                    child: _MovieRow(
-                      title: 'Continue Watching for $profileName',
-                      movies: feed.nowPlaying,
-                    ),
+                ),
+                SliverToBoxAdapter(
+                  child: _MovieRow(
+                    title: 'Continue Watching for $profileName',
+                    movies: feed.nowPlaying,
                   ),
-                  SliverToBoxAdapter(
-                    child: _MovieRow(
-                      title: 'Popular on Netflix',
-                      movies: feed.popular,
-                    ),
+                ),
+                SliverToBoxAdapter(
+                  child: _MovieRow(
+                    title: 'Popular on Netflix',
+                    movies: feed.popular,
                   ),
-                  SliverToBoxAdapter(
-                    child: _MovieRow(
-                      title: 'Trending Now',
-                      movies: feed.trending,
-                    ),
+                ),
+                SliverToBoxAdapter(
+                  child: _MovieRow(
+                    title: 'Trending Now',
+                    movies: feed.trending,
                   ),
-                  SliverToBoxAdapter(
-                    child: _MovieRow(
-                      title: 'Top Rated',
-                      movies: feed.topRated,
-                      tall: true,
-                    ),
+                ),
+                SliverToBoxAdapter(
+                  child: _MovieRow(
+                    title: 'Top Rated',
+                    movies: feed.topRated,
+                    tall: true,
                   ),
-                  SliverToBoxAdapter(child: SizedBox(height: 24.h)),
-                ],
-              ),
-            _ => const SizedBox.shrink(),
-          };
-        },
-      ),
-      bottomNavigationBar: _BottomNav(
-        currentIndex: _tabIndex,
-        onTap: (index) {
-          setState(() => _tabIndex = index);
-          if (index == 1) context.go(routeSearchScreen);
-          if (index == 2) context.go(routeComingSoonScreen);
-        },
-      ),
+                ),
+                SliverToBoxAdapter(child: SizedBox(height: 24.h)),
+              ],
+            ),
+          _ => const SizedBox.shrink(),
+        };
+      },
     );
   }
 }
@@ -142,7 +118,7 @@ class _TopBar extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
         child: Row(
           children: [
-            Image.asset(netflix, height: 28.h, fit: BoxFit.contain),
+            Image.asset(netflixLogo, height: 28.h, fit: BoxFit.contain),
             const Spacer(),
             if (profileImage != null)
               ClipRRect(
@@ -318,64 +294,6 @@ class _MessageView extends StatelessWidget {
               child: const Text('Retry'),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _BottomNav extends StatelessWidget {
-  const _BottomNav({required this.currentIndex, required this.onTap});
-
-  final int currentIndex;
-  final ValueChanged<int> onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final items = [
-      (Icons.home, 'Home'),
-      (Icons.search, 'Search'),
-      (Icons.video_collection_outlined, 'Coming Soon'),
-      (Icons.download_outlined, 'Downloads'),
-      (Icons.menu, 'More'),
-    ];
-
-    return Container(
-      color: const Color(0xFF121212),
-      child: SafeArea(
-        top: false,
-        child: SizedBox(
-          height: 56.h,
-          child: Row(
-            children: [
-              for (var i = 0; i < items.length; i++)
-                Expanded(
-                  child: InkWell(
-                    onTap: () => onTap(i),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          items[i].$1,
-                          color:
-                              i == currentIndex ? Colors.white : Colors.white54,
-                          size: 22.r,
-                        ),
-                        Text(
-                          items[i].$2,
-                          style: TextStyle(
-                            color: i == currentIndex
-                                ? Colors.white
-                                : Colors.white54,
-                            fontSize: 10.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-            ],
-          ),
         ),
       ),
     );

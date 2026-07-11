@@ -12,6 +12,7 @@ class MovieModel extends Equatable {
     this.voteAverage = 0,
     this.releaseDate,
     this.popularity = 0,
+    this.genreIds = const [],
   });
 
   final int id;
@@ -22,12 +23,22 @@ class MovieModel extends Equatable {
   final double voteAverage;
   final String? releaseDate;
   final double popularity;
+  final List<int> genreIds;
 
   String get posterUrl => ApiConstants.posterUrl(posterPath);
   String get backdropUrl =>
       ApiConstants.backdropUrl(backdropPath ?? posterPath);
 
+  /// Human-readable genre labels from TMDB [genreIds].
+  List<String> get genreLabels => genreIds
+      .map((id) => _genreNames[id])
+      .whereType<String>()
+      .toList();
+
+  String get genresLine => genreLabels.join(' • ');
+
   factory MovieModel.fromJson(Map<String, dynamic> json) {
+    final rawGenres = json['genre_ids'] as List<dynamic>? ?? [];
     return MovieModel(
       id: json['id'] as int? ?? 0,
       title: (json['title'] ?? json['name'] ?? '') as String,
@@ -37,6 +48,7 @@ class MovieModel extends Equatable {
       voteAverage: (json['vote_average'] as num?)?.toDouble() ?? 0,
       releaseDate: (json['release_date'] ?? json['first_air_date']) as String?,
       popularity: (json['popularity'] as num?)?.toDouble() ?? 0,
+      genreIds: rawGenres.map((e) => (e as num).toInt()).toList(),
     );
   }
 
@@ -49,6 +61,7 @@ class MovieModel extends Equatable {
         'vote_average': voteAverage,
         'release_date': releaseDate,
         'popularity': popularity,
+        'genre_ids': genreIds,
       };
 
   @override
@@ -61,7 +74,30 @@ class MovieModel extends Equatable {
         voteAverage,
         releaseDate,
         popularity,
+        genreIds,
       ];
+
+  static const Map<int, String> _genreNames = {
+    28: 'Action',
+    12: 'Adventure',
+    16: 'Animation',
+    35: 'Comedy',
+    80: 'Crime',
+    99: 'Documentary',
+    18: 'Drama',
+    10751: 'Family',
+    14: 'Fantasy',
+    36: 'History',
+    27: 'Horror',
+    10402: 'Music',
+    9648: 'Mystery',
+    10749: 'Romance',
+    878: 'Sci-Fi',
+    10770: 'TV Movie',
+    53: 'Thriller',
+    10752: 'War',
+    37: 'Western',
+  };
 }
 
 /// Paginated TMDB list response.

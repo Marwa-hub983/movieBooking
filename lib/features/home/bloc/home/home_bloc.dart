@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movieapp/features/home/bloc/home_event.dart';
-import 'package:movieapp/features/home/bloc/home_state.dart';
+import 'package:movieapp/features/home/bloc/home/home_event.dart';
+import 'package:movieapp/features/home/bloc/home/home_state.dart';
 import 'package:movieapp/features/home/domain/models/home_feed.dart';
 import 'package:movieapp/shared/domain/repositories/movie_repository.dart';
 import 'package:movieapp/shared/models/movie_model.dart';

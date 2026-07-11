@@ -6,3 +6,4 @@ const profileOnyeka = 'assets/images/onyeka.png';
 const profileThelma = 'assets/images/thelma.png';
 const profileKids = 'assets/images/kids.png';
 const profileAdd = 'assets/images/add_profile.png';
+const netflixLogo = 'assets/icons/Vector-3.png';

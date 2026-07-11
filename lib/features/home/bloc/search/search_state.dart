@@ -17,6 +17,16 @@ class SearchLoading extends SearchState {
   const SearchLoading();
 }
 
+/// Default list shown when the query is empty (Top Searches).
+class SearchTopLoaded extends SearchState {
+  const SearchTopLoaded(this.movies);
+
+  final List<MovieModel> movies;
+
+  @override
+  List<Object?> get props => [movies];
+}
+
 class SearchLoaded extends SearchState {
   const SearchLoaded(this.movies, {required this.query});
 
@@ -37,7 +47,7 @@ class SearchEmpty extends SearchState {
 }
 
 class SearchError extends SearchState {
-  const SearchError(this.failure, {required this.query});
+  const SearchError(this.failure, {this.query = ''});
 
   final Failure failure;
   final String query;

@@ -1,7 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:movieapp/features/coming_soon/screens/coming_soon_screen.dart';
-import 'package:movieapp/features/home/screens/home_screen.dart';
-import 'package:movieapp/features/home/screens/search_screen.dart';
+import 'package:movieapp/features/home/screens/main_shell.dart';
 import 'package:movieapp/features/home/screens/splash_screen.dart';
 import 'package:movieapp/features/username/models/profile.dart';
 import 'package:movieapp/features/username/screens/username_screen.dart';
@@ -24,21 +22,18 @@ class RouteGenerator {
           path: routeHomeScreen,
           builder: (context, state) {
             final profile = state.extra as Profile?;
-            return HomeScreen(
+            final tab = int.tryParse(
+                  state.uri.queryParameters['tab'] ?? '',
+                ) ??
+                0;
+            return MainShell(
               profileName: profile?.name ??
                   state.uri.queryParameters['profile'] ??
                   'User',
               profileImage: profile?.image,
+              initialIndex: tab.clamp(0, 4),
             );
           },
-        ),
-        GoRoute(
-          path: routeSearchScreen,
-          builder: (context, state) => const SearchScreen(),
-        ),
-        GoRoute(
-          path: routeComingSoonScreen,
-          builder: (context, state) => const ComingSoonScreen(),
         ),
       ],
     );

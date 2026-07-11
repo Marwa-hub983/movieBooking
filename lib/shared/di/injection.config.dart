@@ -13,8 +13,8 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../../features/coming_soon/bloc/coming_soon_bloc.dart' as _i84;
-import '../../features/home/bloc/home_bloc.dart' as _i854;
-import '../../features/home/bloc/search_bloc.dart' as _i79;
+import '../../features/home/bloc/home/home_bloc.dart' as _i854;
+import '../../features/home/bloc/search/search_bloc.dart' as _i79;
 import '../../features/home/data/datasources/movie_api_service.dart' as _i364;
 import '../../features/home/data/repositories/movie_repository_impl.dart'
     as _i449;
